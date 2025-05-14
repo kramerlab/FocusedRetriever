@@ -1,0 +1,22 @@
+{
+  "general": {
+    "ask_for_target_type_NO_IMPROVEMENT": "Given the instance types: {candidate_types}, identify which type can best answer the query:\n {query}\nDon't overthink it; prefer obvious answers. Return one type only. ",
+    "ask_for_target_type": "Given several instances of these types: {candidate_types}. An instance of which type could correctly answer the query: {query}\n\nReturn nothing but the type of which the instance must be of. Think straightforwardly.",
+    "ask_for_constants": "User Question: {query}\n Identify relevant entities in the question to query a knowledge base. The user is asking for a {target_type}. The knowledge base includes the following entity types: {nodes_types}.\nTask: Extract specific entity instances from the question that can help locate the {target_type}. Format each entity as:\nEntity Name::Entity Type\nSeparate multiple entities with |.\nExample for a different question: ",
+    "ask_for_triplets": "Given, the query:\n{query}\nReturn a short sequence of triplets describing the main relationships in that query. Format triplets as: Head -> Relation -> Tail. Separate triplets with | . Use the variable ?1::{target_type} to represent the final answer of the query, and connect it to the following constants as Heads or Tails. Constants:\n{valid_atomics}\nIn rare, necessary cases, to bridge between the target variable and a constant, you are allowed to introduce auxiliary variables meaningfully. An auxiliary variable is formated as an enumerated question mark, followed by two colons and its entity type. Allowed entity types:\n{nodes_to_consider}\nAllowed relations:\n{edges_to_consider}\nThe entity type of both the triplet's Head and the triplet's Tail must be compatible with the relation. Example for a different query:",
+"llm_activation": "Given the context:\n\"{query}\",\nidentify which entities from the {type_of_kb} database best match \"{target_name}\".\n\nEntities: {node_descriptions}\n\nReturn the ENTITY_IDs of all matching entities only, separated by commas. Unrelated example:\n0,1,5",
+    "llm_activation_OLD": "Determine from the following list of entities from a {type_of_kb} database those entities that might match an entity from a query. The query is: \"{query}\". The searched entity from that query is \"{target_name}\".\n{node_descriptions}\nReturn the numbers in front of all entities that can match the searched entity in the query, separated by commas, e.g.: 0,1,5'"
+  },
+  "prime": {
+    "ask_for_further_atomic_terms_example": "headache::effect/phenotype | osteogenesis imperfecta::disease | 9-phenanthrol::exposure",
+    "ask_for_triplets_example": "'headache'::effect/phenotype -> 'is_phenotype_of_disease' -> ?1::disease | '9-phenanthrol'::exposure -> 'exposure_is_linked_to_disease' -> ?1::disease"
+  },
+  "mag": {
+    "ask_for_further_atomic_terms_example": "hemingway::author | simson university bonn::institution",
+    "ask_for_triplets_example": "?1::paper -> 'paper_cites_paper' -> ?2::paper | 'hemingway'::author -> 'author_writes_paper' -> ?2::paper"
+  },
+  "amazon": {
+    "ask_for_further_atomic_terms_example": "x5 chair basic::product | sky blue::color",
+    "ask_for_triplets_example": "?1::product -> 'product_also_buy_product' -> ?2::product | ?2::product -> 'product_has_brand' -> 'samsons ltd.'::brand"
+  }
+}
